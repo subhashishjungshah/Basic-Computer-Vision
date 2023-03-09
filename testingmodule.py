@@ -8,9 +8,11 @@ cap = cv2.VideoCapture(0)
 handdetector = hdm.HandDetector()
 while True:
     success, img = cap.read()
-    # img = cv2.flip(img, 1)
+    img = cv2.flip(img, 1)
     img = handdetector.findHands(img)
-    handdetector.findPosition(img,0,False)
+    lmlist = handdetector.findPosition(img,0,True)
+    if(len(lmlist)>0):
+        print(lmlist[0])
     currentTime = time.time()
     fps = 1 / (currentTime - pTime)
     pTime = currentTime
